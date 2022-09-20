@@ -56,12 +56,25 @@ func main() {
 	tx.GasLimit = 3000000
 	tx.GasPrice = gasprice
 
-	n := new(big.Int)
-	n.SetString("10", 10)
-	transaction, err := st.Store(tx, n)
+	// transaction, err := st.Store(tx, big.NewInt(100))
+	// if err != nil {
+	// 	log.Fatal("err4 ", err)
+	// }
+
+	// fmt.Print(transaction.Hash())
+
+	transaction2, err := st.Retrieve(&bind.CallOpts{})
 	if err != nil {
 		log.Fatal("err4 ", err)
 	}
 
-	fmt.Print(transaction)
+	fmt.Print("\n retrieve \n", transaction2)
+
+	transaction3, err := st.AddPerson(tx, "dev", big.NewInt(1))
+	if err != nil {
+		log.Fatal("err5 ", err)
+	}
+
+	fmt.Print(" \n write \n", transaction3.Hash())
+
 }
